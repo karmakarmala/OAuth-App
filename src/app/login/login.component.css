@@ -11,8 +11,7 @@
 .login-card-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh; /* Use full viewport height */
+  height: 25vh; /* Use full viewport height */
 }
 
 .login-card {
