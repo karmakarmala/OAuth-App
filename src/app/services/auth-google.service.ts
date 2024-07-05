@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AuthConfig, OAuthEvent, OAuthService } from 'angular-oauth2-oidc';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -19,43 +19,41 @@ export class AuthGoogleService {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
       redirectUri: window.location.origin + '/home',
-      clientId:
-        '7813125497-3gdsa8agoihvavb7bcbkcc96dkhqn8fp.apps.googleusercontent.com',
-      // responseType: 'code',
+      clientId: 'your-client-id',
       scope: 'openid profile email',
-      showDebugInformation: true,
     };
     this.oAuthService.configure(authConfig);
     this.oAuthService.setupAutomaticSilentRefresh();
-    this.oAuthService
-      .loadDiscoveryDocumentAndTryLogin()
-      .then(() => {
-        console.log('OAuth initialization completed');
-        console.log('Access Token:', this.oAuthService.getAccessToken());
-        console.log('ID Token:', this.oAuthService.getIdToken());
-        if (this.oAuthService.hasValidAccessToken()) {
-          console.log('Access token is valid, navigating to home');
-          this.router.navigate(['/home']);
-        } else {
-          console.log('No valid access token found');
-        }
-      })
-      .catch((error) => {
-        console.error('Error during OAuth initialization', error);
-      });
+    this.oAuthService.loadDiscoveryDocumentAndTryLogin();
+
+    // Code for diagnosing OAuth issues
+    // .then(() => {
+    // console.log('OAuth initialization completed');
+    // console.log('Access Token:', this.oAuthService.getAccessToken());
+    // console.log('ID Token:', this.oAuthService.getIdToken());
+    // if (this.oAuthService.hasValidAccessToken()) {
+    //   console.log('Access token is valid, navigating to home');
+    //   this.router.navigate(['/home']);
+    // } else {
+    //   console.log('No valid access token found');
+    // }
+    // });
+    // .catch((error) => {
+    //   console.error('Error during OAuth initialization', error);
+    // });
     // Subscribe to OAuth events
-    this.oAuthService.events.subscribe((event: OAuthEvent) => {
-      console.log('OAuth Event:', event);
-      if (event.type === 'token_received') {
-        console.log('Token received event');
-        console.log('Access Token:', this.oAuthService.getAccessToken());
-        console.log('ID Token:', this.oAuthService.getIdToken());
-      } else if (event.type === 'token_error') {
-        console.error('Token error event', event);
-        // Handle token error, e.g., display error message or redirect to login page
-      }
-      // Add more handling for other event types as needed
-    });
+    // this.oAuthService.events.subscribe((event: OAuthEvent) => {
+    //   console.log('OAuth Event:', event);
+    //   if (event.type === 'token_received') {
+    //     console.log('Token received event');
+    //     console.log('Access Token:', this.oAuthService.getAccessToken());
+    //     console.log('ID Token:', this.oAuthService.getIdToken());
+    //   } else if (event.type === 'token_error') {
+    //     console.error('Token error event', event);
+    //     // Handle token error, e.g., display error message or redirect to login page
+    //   }
+    //   // Add more handling for other event types as needed
+    // });
   }
   login() {
     console.log('Starting login process');
@@ -69,11 +67,6 @@ export class AuthGoogleService {
   }
 
   getProfile() {
-    const profile = this.oAuthService.getIdentityClaims();
-    return profile;
-  }
-
-  getToken() {
-    return this.oAuthService.getAccessToken();
+    return this.oAuthService.getIdentityClaims();
   }
 }

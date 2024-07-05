@@ -1,7 +1,27 @@
-<div class="login-button">
-  <div
-    id="google-login-button"
-    class="login-button btn btn-primary"
-    (click)="signInWithGoogle()"
-  ></div>
+<!--<div class="login-button">-->
+<!--  <div-->
+<!--    id="google-login-button"-->
+<!--    class="login-button btn btn-primary"-->
+<!--    (click)="loginInWithGoogle()"-->
+<!--  ></div>-->
+<!--</div>-->
+
+<div class="login-card-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="title">{{title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="button-row">
+        <button class="login-button" mat-raised-button color="primary" (click)="loginInWithGoogle()">
+          <img src="assets/icons/google.png" alt="Google" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px;">
+          Log in with Google
+        </button>
+        <button class="login-button" mat-raised-button color="accent" (click)="loginInWithFacebook()">
+          <img src="assets/icons/facebook.png" alt="Facebook" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
+          Log in with Facebook
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

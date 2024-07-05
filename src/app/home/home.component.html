@@ -1,9 +1,7 @@
-<div class="dashboard">
-  <h1>Dashboard - user has logged in</h1>
-
-  <p>
-    {{ profile | json }}
-  </p>
-
-  <button (click)="logOut()">LogOut</button>
+<div class="home">
+  <h1>Home Page</h1>
+  <p>Name: {{ profile.name }}</p>
+  <p>Email: {{ profile.email }}</p>
+  <p><img [src]="profile.picture" /></p>
+  <button mat-raised-button color="primary" (click)="logOut()">LogOut</button>
 </div>
